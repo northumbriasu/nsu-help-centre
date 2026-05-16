@@ -35,6 +35,37 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  // ── "Was this helpful?" feedback (article pages only) ────
+  if (!isHomepage) {
+    var content = document.querySelector('.md-content__inner');
+    var isSection = document.querySelector('.nsu-cards'); // section landing pages
+
+    if (content && !isSection) {
+      var title   = document.title.replace(' - NSU Help Centre', '').trim();
+      var url     = window.location.href;
+      var email   = 'su.marketing@northumbria.ac.uk';
+
+      var yesLink = 'mailto:' + email
+        + '?subject=' + encodeURIComponent('✓ Helpful: ' + title)
+        + '&body=' + encodeURIComponent('Article: ' + url + '\n\nThis article was helpful.');
+
+      var noLink  = 'mailto:' + email
+        + '?subject=' + encodeURIComponent('✗ Not helpful: ' + title)
+        + '&body=' + encodeURIComponent('Article: ' + url + '\n\nThis article was not helpful.\n\nWhat could be improved?\n');
+
+      var feedback = document.createElement('div');
+      feedback.className = 'nsu-feedback';
+      feedback.innerHTML =
+        '<p class="nsu-feedback__question">Was this article helpful?</p>' +
+        '<div class="nsu-feedback__buttons">' +
+          '<a class="nsu-feedback__btn nsu-feedback__btn--yes" href="' + yesLink + '">Yes</a>' +
+          '<a class="nsu-feedback__btn nsu-feedback__btn--no"  href="' + noLink  + '">No</a>' +
+        '</div>';
+
+      content.appendChild(feedback);
+    }
+  }
+
   // ── Homepage: custom search + hide header search ──────────
   if (!isHomepage) return;
 

@@ -366,6 +366,58 @@ body {
   margin: 0;
 }
 
+/* ── "Was this helpful?" feedback block ─────────────────── */
+.nsu-feedback {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  border-top: 1px solid #ece0da;
+  text-align: center;
+}
+
+.nsu-feedback__question {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.65);
+  margin: 0 0 1rem;
+}
+
+.nsu-feedback__buttons {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.nsu-feedback__btn {
+  display: inline-block;
+  padding: 0.45rem 1.5rem;
+  border-radius: 4px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none !important;
+  border: 1.5px solid;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nsu-feedback__btn--yes {
+  border-color: #9793c7;
+  color: #9793c7;
+}
+
+.nsu-feedback__btn--yes:hover {
+  background: #9793c7;
+  color: #fff !important;
+}
+
+.nsu-feedback__btn--no {
+  border-color: #ddd;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.nsu-feedback__btn--no:hover {
+  border-color: #eba8c7;
+  color: #eba8c7 !important;
+}
+
 /* ── Read time ──────────────────────────────────────────── */
 .nsu-read-time {
   font-size: 0.8rem;
