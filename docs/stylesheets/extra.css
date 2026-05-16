@@ -366,6 +366,59 @@ body {
   margin: 0;
 }
 
+/* ── Read time ──────────────────────────────────────────── */
+.nsu-read-time {
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.38);
+  margin: -0.5rem 0 1.5rem;
+  letter-spacing: 0.02em;
+}
+
+/* ── Sidebar top-level section headers ──────────────────── */
+.md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav__link {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.07em;
+  color: rgba(0, 0, 0, 0.55);
+  padding-top: 1rem;
+}
+
+.md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav__link:hover {
+  color: var(--nsu-purple);
+}
+
+/* ── Header: draw a divider line aligned with the sidebar ── */
+@media screen and (min-width: 60em) {
+  .md-header {
+    position: relative;
+  }
+
+  .md-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--nsu-sidebar-width);
+    width: 1px;
+    background: rgba(229, 210, 200, 0.6);
+    pointer-events: none;
+  }
+
+  /* Left-align logo and title, constrained to sidebar width */
+  .md-header__inner {
+    padding-left: 0;
+  }
+
+  .md-header__button.md-logo {
+    padding-left: 1rem;
+  }
+
+  .md-header__title {
+    padding-right: 1rem;
+  }
+}
+
 /* ── Copy link button ───────────────────────────────────── */
 .md-content__inner > h1 {
   display: flex;

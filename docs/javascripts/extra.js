@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
   var isHomepage = !!document.querySelector('.nsu-hero-search-target');
 
-  // ── Copy link button (article pages only) ────────────────
+  // ── Copy link button + read time (article pages only) ───────
   if (!isHomepage) {
     var h1 = document.querySelector('.md-content__inner > h1');
     if (h1) {
+      // Copy link button
       var btn = document.createElement('button');
       btn.className = 'nsu-copy-link';
       btn.title = 'Copy link to this page';
@@ -20,6 +21,17 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       });
       h1.appendChild(btn);
+
+      // Read time
+      var articleEl = document.querySelector('.md-content__inner');
+      if (articleEl) {
+        var words = (articleEl.innerText || '').trim().split(/\s+/).length;
+        var mins  = Math.max(1, Math.ceil(words / 200));
+        var meta  = document.createElement('p');
+        meta.className = 'nsu-read-time';
+        meta.textContent = mins + ' min read';
+        h1.insertAdjacentElement('afterend', meta);
+      }
     }
   }
 
