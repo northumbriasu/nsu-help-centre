@@ -3,9 +3,6 @@ site_description: Help and guidance for Northumbria Students' Union staff and st
 site_author: Northumbria Students' Union
 site_url: https://northumbriasu.github.io/nsu-help-centre/
 
-exclude_docs: |
-  admin/
-
 theme:
   name: material
   custom_dir: overrides
