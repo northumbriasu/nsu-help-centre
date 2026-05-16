@@ -1,0 +1,86 @@
+backend:
+  name: github
+  repo: northumbriasu/nsu-help-centre
+  branch: main
+  base_url: https://sveltia-cms-auth.pages.dev
+
+media_folder: docs/assets/images
+public_folder: ../assets/images
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "-"
+
+collections:
+
+  - name: advice
+    label: "📚 Advice"
+    label_singular: "Advice article"
+    folder: docs/advice
+    create: true
+    nested:
+      depth: 2
+    filter: { field: _type, value: null }
+    fields:
+      - { label: Title, name: title, widget: string }
+      - label: Topic
+        name: topic
+        widget: select
+        options:
+          - Academic Appeals
+          - Academic Misconduct
+          - Complaints
+          - Discipline
+          - Disciplinary & Accommodation Charges
+          - Financial Exclusion
+          - Fitness to Practice
+          - Housing
+          - OIA
+          - Request for Review
+          - Research Students
+          - Contact the Advice Team
+      - { label: Body, name: body, widget: markdown }
+
+  - name: wellbeing
+    label: "💚 Wellbeing"
+    label_singular: "Wellbeing article"
+    folder: docs/wellbeing
+    create: true
+    nested:
+      depth: 2
+    fields:
+      - { label: Title, name: title, widget: string }
+      - label: Topic
+        name: topic
+        widget: select
+        options:
+          - Cost of Living
+          - Domestic Abuse & Sexual Violence
+          - Living Well & Student Safety
+          - London Campus
+          - Mental Health
+          - Relationships, Sex & Sexual Health
+          - Training & Courses
+          - "What's On in Wellbeing"
+          - Where to Get Support
+      - { label: Body, name: body, widget: markdown }
+
+  - name: reps
+    label: "🗣️ Reps"
+    label_singular: "Reps article"
+    folder: docs/reps
+    create: true
+    nested:
+      depth: 2
+    fields:
+      - { label: Title, name: title, widget: string }
+      - label: Topic
+        name: topic
+        widget: select
+        options:
+          - Programme Reps
+          - Leadership Reps
+          - Campaigning & Equality
+          - Rep Resources
+      - { label: Body, name: body, widget: markdown }
