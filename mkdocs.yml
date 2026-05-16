@@ -1,0 +1,135 @@
+site_name: NSU Help Centre
+site_description: Help and guidance for Northumbria Students' Union staff and students
+site_author: Northumbria Students' Union
+
+theme:
+  name: material
+  custom_dir: overrides
+  palette:
+    scheme: default
+  font: false
+  features:
+    - navigation.indexes
+    - navigation.top
+    - search.highlight
+    - search.suggest
+    - toc.integrate
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/extra.js
+
+plugins:
+  - search
+
+nav:
+  - Home: index.md
+  - "📚 Advice":
+      - advice/index.md
+      - Academic Appeals:
+          - "Breakdown Academic Appeal processes": advice/academic-appeals/breakdown-academic-appeal-processes.md
+          - "Commonly asked questions following Exam Board results": advice/academic-appeals/commonly-asked-questions-following-exam-board-results.md
+          - "Guidance on preparing an appeal": advice/academic-appeals/guidance-on-preparing-an-appeal.md
+      - Academic Misconduct:
+          - "Academic Misconduct : A step by step guide.": advice/academic-misconduct/academic-misconduct-a-step-by-step-guide.md
+          - "Academic Misconduct: Myth Busters": advice/academic-misconduct/academic-misconduct-myth-busters.md
+          - "Appealing a Stage 2 Academic Misconduct decision": advice/academic-misconduct/appealing-a-stage-2-academic-misconduct-decision.md
+          - "Guidance for writing a statement for Academic Misconduct meetings.": advice/academic-misconduct/guidance-for-writing-a-statement-for-academic-misconduct-meetings.md
+          - "How can I avoid Academic Misconduct?": advice/academic-misconduct/how-can-i-avoid-academic-misconduct.md
+          - "What are the different types of Academic Misconduct": advice/academic-misconduct/what-are-the-different-types-of-academic-misconduct.md
+      - Complaints:
+          - "A guide to Complaints": advice/complaints/a-guide-to-complaints.md
+      - Disciplinary & Accommodation Charges:
+          - "Disciplinary in Accommodation": advice/disciplinary-fines-and-charges-in-accommodation/disciplinary-in-accommodation.md
+          - "Fines and Charges in accommodation": advice/disciplinary-fines-and-charges-in-accommodation/fines-and-charges-in-accommodation.md
+      - Discipline:
+          - "Disciplinary process within the University or community": advice/discipline/disciplinary-process-within-the-university-or-community.md
+      - Financial Exclusion:
+          - "I have paid my fees, can the Students' Union revoke the exclusion decision": advice/financial-exclusion/i-have-paid-my-fees-can-the-students-union-revoke-the-exclusion-decision.md
+          - "I have received an email from the UKVI/Home Office what can I do?": advice/financial-exclusion/i-have-received-an-email-from-the-ukvihome-office-what-can-i-do.md
+          - "Submitting an appeal": advice/financial-exclusion/submitting-an-appeal.md
+      - Fitness to Practice:
+          - "Fitness To Practice procedures": advice/fitness-to-practice/fitness-to-practice-procedures.md
+          - "Guidance on statements for Stage 2 Panels": advice/fitness-to-practice/guidance-on-statements-for-stage-2-panels.md
+      - Housing:
+          - "Damp and disrepair - raising concern about living conditions": advice/housing/damp-and-disrepair-raising-concern-about-living-conditions.md
+          - "Deposits and getting this back": advice/housing/deposits-and-getting-this-back.md
+          - "Inventory - including a template to create your own": advice/housing/inventory-including-a-template-to-create-your-own.md
+          - "Recycling, rubbish and waste": advice/housing/recycling-rubbish-and-waste.md
+          - "What are my housing rights?": advice/housing/what-are-my-housing-rights.md
+          - "What is a HMO and checking your landlord has a licence": advice/housing/what-is-a-hmo-and-checking-your-landlord-has-a-licence.md
+      - Contact the Advice Team:
+          - "Contact details": advice/how-to-contact-the-advice-team/contact-details.md
+      - Research Students:
+          - "Annexe Appeals": advice/information-for-research-students/annexe-appeals.md
+          - "Other information": advice/information-for-research-students/other-information.md
+          - "Supervision Info": advice/information-for-research-students/supervision-info.md
+          - "What can be a ‘Circumstances Affecting Progress’?": advice/information-for-research-students/what-can-be-a-circumstances-affecting-progress.md
+      - OIA:
+          - "What is the OIA?": advice/oia/what-is-the-oia.md
+      - Request for Review:
+          - "Stage 3 Request for Review": advice/request-for-review/stage-3-request-for-review.md
+  - "💚 Wellbeing":
+      - wellbeing/index.md
+      - Cost of Living:
+          - "Food Pantry": wellbeing/cost-of-living/food-pantry.md
+          - "Swap Shop": wellbeing/cost-of-living/swap-shop.md
+          - "Warm Space": wellbeing/cost-of-living/warm-space.md
+      - Domestic Abuse & Sexual Violence:
+          - "Domestic Violence": wellbeing/domestic-abuse-sexual-violence-and-harm-reduction/domestic-violence.md
+          - "Drugs and Alcohol": wellbeing/domestic-abuse-sexual-violence-and-harm-reduction/drugs-and-alcohol.md
+          - "Sexual Harassment and Violence": wellbeing/domestic-abuse-sexual-violence-and-harm-reduction/sexual-harassment-and-violence.md
+          - "Unacceptable Behaviour": wellbeing/domestic-abuse-sexual-violence-and-harm-reduction/unacceptable-behaviour.md
+      - Living Well & Student Safety:
+          - "Campus Security": wellbeing/living-well-and-student-safety/campus-security.md
+          - "Fraud Awareness": wellbeing/living-well-and-student-safety/fraud-awareness.md
+          - "Unacceptable Behaviours Reporting Tool": wellbeing/living-well-and-student-safety/unacceptable-behaviours-reporting-tool.md
+      - London Campus:
+          - "Cost of Living Support": wellbeing/london-campus/cost-of-living-support.md
+          - "Sexual Health Services": wellbeing/london-campus/sexual-health-services.md
+      - Mental Health:
+          - "Men's Mental Health Support": wellbeing/mental-health/mens-mental-health-support.md
+          - "Your Mental Health": wellbeing/mental-health/your-mental-health.md
+      - Relationships, Sex & Sexual Health:
+          - "Contraception": wellbeing/relationships-sex-and-sexual-health/contraception.md
+          - "HIV Awareness and Support": wellbeing/relationships-sex-and-sexual-health/hiv-awareness-and-support.md
+          - "Period Poverty": wellbeing/relationships-sex-and-sexual-health/period-poverty.md
+          - "Sexual Health and Guidance": wellbeing/relationships-sex-and-sexual-health/sexual-health-and-guidance.md
+      - Training & Courses:
+          - "Active Bystander Training": wellbeing/training-and-courses/active-bystander-training.md
+          - "Lead the Change Training": wellbeing/training-and-courses/lead-the-change-training.md
+          - "Mental Health First Aid": wellbeing/training-and-courses/mental-health-first-aid.md
+          - "NHS Make Every Contact Count Training": wellbeing/training-and-courses/nhs-make-every-contact-count-training.md
+      - What's On in Wellbeing:
+          - "Converge": wellbeing/whats-on-in-wellbeing-at-nsu/converge.md
+          - "Therapy Dogs at NSU": wellbeing/whats-on-in-wellbeing-at-nsu/therapy-dogs-at-nsu.md
+          - "Wellbeing Drop-ins": wellbeing/whats-on-in-wellbeing-at-nsu/wellbeing-drop-ins.md
+          - "Wellbeing Products": wellbeing/whats-on-in-wellbeing-at-nsu/wellbeing-products.md
+      - Where to Get Support:
+          - "NHS info": wellbeing/where-to-get-support/nhs-info.md
+          - "Out of Hours Emergency Support": wellbeing/where-to-get-support/out-of-hours-emergency-support.md
+          - "University Support": wellbeing/where-to-get-support/university-support.md
+  - "🗣️ Reps":
+      - reps/index.md
+      - Campaigning & Equality:
+          - "How can I campaign?": reps/campaigning-and-equality/how-can-i-campaign.md
+          - "How can NSU support me with equity and inclusion?": reps/campaigning-and-equality/how-can-nsu-support-me-with-equity-and-inclusion.md
+          - "What are Equality Reps?": reps/campaigning-and-equality/what-are-equality-reps.md
+      - Leadership Reps:
+          - "What is a Leadership Rep?": reps/leadership-reps/what-is-a-leadership-rep.md
+          - "What is a PGR Rep?": reps/leadership-reps/what-is-a-pgr-rep.md
+      - Programme Reps:
+          - "How can I contact everyone on my programme easily?": reps/programme-reps/how-can-i-contact-everyone-on-my-programme-easily.md
+          - "How do I complete self-directed training?": reps/programme-reps/how-do-i-complete-self-directed-training.md
+          - "How do I work with other reps?": reps/programme-reps/how-do-i-work-with-other-reps.md
+          - "What are the benefits of being a Programme Rep?": reps/programme-reps/what-are-the-benefits-of-being-a-programme-rep.md
+          - "What are Townhall Meetings?": reps/programme-reps/what-are-townhall-meetings.md
+          - "What do Programme Reps do?": reps/programme-reps/what-do-programme-reps-do.md
+          - "What's a Rep?": reps/programme-reps/whats-a-rep.md
+      - Rep Resources:
+          - "How do I get feedback as a rep?": reps/rep-resources/how-do-i-get-feedback-as-a-rep.md
+          - "How do I say no?": reps/rep-resources/how-do-i-say-no.md
+          - "How do I signpost?": reps/rep-resources/how-do-i-signpost.md
+          - "How do I use Coursemate to submit feedback?": reps/rep-resources/how-do-i-use-coursemate-to-submit-feedback.md
