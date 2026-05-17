@@ -1,0 +1,879 @@
+/* =====================================================================
+   NSU Help Centre — theme matching the wireframe design
+   ===================================================================== */
+
+/* ── Root variables ─────────────────────────────────────── */
+:root {
+  /* Wireframe palette */
+  --wf-ink:    #1a1a1a;
+  --wf-ink-2:  #555;
+  --wf-ink-3:  #8a8a86;
+  --wf-line:   #c9c9c4;
+  --wf-fill-1: #ececea;
+  --wf-fill-2: #f4f4f1;
+  --wf-fill-3: #d9d9d4;
+  --wf-page:   #fbfaf7;
+
+  /* NSU Brand */
+  --nsu-yellow: #f5e35c;
+  --nsu-pink:   #eba8c7;
+  --nsu-lilac:  #a3a8d6;
+  --nsu-green:  #698c54;
+  --nsu-black:  #000;
+  --nsu-white:  #fff;
+
+  /* Type variation axes */
+  --vv-body:         "wdth" 110, "wght" 400;
+  --vv-display:      "wdth" 130, "wght" 900;
+  --vv-condensed-xb: "wdth"  85, "wght" 800;
+  --vv-extra-bold:   "wdth" 100, "wght" 800;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+
+  /* Radii */
+  --radius-soft: 6px;
+  --radius-md:   10px;
+  --radius-pill: 999px;
+
+  /* Layout */
+  --nsu-sidebar-width: 21.25rem; /* 340px — matches wireframe */
+
+  /* Material token overrides */
+  --md-text-font: "vinila-variable", system-ui, sans-serif;
+  --md-code-font: "Roboto Mono", monospace;
+}
+
+/* ── Global base ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  background: var(--wf-page);
+  color: var(--wf-ink);
+}
+
+body {
+  font-family: "vinila-variable", system-ui, sans-serif;
+  font-variation-settings: var(--vv-body);
+}
+
+/* ── Material colour overrides ──────────────────────────── */
+:root,
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color:        var(--wf-fill-3);
+  --md-primary-fg-color--light: #f0eeeb;
+  --md-primary-fg-color--dark:  #c0bdb9;
+  --md-primary-bg-color:        var(--wf-ink);
+  --md-primary-bg-color--light: rgba(26, 26, 26, 0.54);
+  --md-accent-fg-color:         var(--nsu-green);
+  --md-accent-fg-color--transparent: rgba(105, 140, 84, 0.1);
+  --md-accent-bg-color:         var(--wf-ink);
+  --md-typeset-a-color:         var(--nsu-green);
+  --md-default-bg-color:        var(--wf-page);
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+.md-header {
+  background: var(--nsu-white);
+  color: var(--wf-ink);
+  box-shadow: none;
+  border-bottom: 1.5px solid var(--wf-ink);
+}
+
+.md-header__title,
+.md-header__topic {
+  color: var(--wf-ink);
+  font-family: "vinila-variable", system-ui, sans-serif;
+  font-variation-settings: var(--vv-extra-bold);
+  font-size: 1.1rem;
+  letter-spacing: -0.005em;
+}
+
+/* NSU logo in header */
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 36px;
+  width: auto;
+}
+
+/* Search bar in header */
+.md-search__input {
+  background: var(--wf-fill-2);
+  border: 1.5px solid var(--wf-line);
+  border-radius: var(--radius-md);
+  color: var(--wf-ink);
+}
+
+.md-search__input::placeholder {
+  color: var(--wf-ink-3);
+}
+
+.md-search__icon {
+  color: var(--wf-ink-2);
+}
+
+/* ── Breadcrumbs (navigation.path) ──────────────────────── */
+.md-nav--primary .md-nav__title {
+  color: var(--wf-ink);
+  font-variation-settings: var(--vv-extra-bold);
+}
+
+/* ── Dual-scroll split layout ───────────────────────────── */
+@media screen and (min-width: 60em) {
+  body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .md-header {
+    flex-shrink: 0;
+    position: relative !important;
+  }
+
+  .md-skip { position: fixed; }
+
+  .md-container {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .md-main {
+    flex: 1;
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  .md-main__inner {
+    height: 100%;
+    overflow: hidden;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 0 !important;
+  }
+
+  /* Sidebar */
+  .md-sidebar--primary {
+    position: relative !important;
+    top: 0 !important;
+    height: 100% !important;
+    width: var(--nsu-sidebar-width) !important;
+    min-width: var(--nsu-sidebar-width) !important;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-right: 1.5px solid var(--wf-ink);
+    background: var(--wf-page);
+  }
+
+  .md-sidebar--primary .md-sidebar__scrollwrap {
+    height: 100% !important;
+    max-height: 100% !important;
+    overflow-y: auto;
+    padding: 1rem 0 3rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--wf-line) transparent;
+  }
+
+  /* Content panel */
+  .md-content {
+    flex: 1;
+    height: 100%;
+    overflow-y: auto;
+    min-width: 0;
+    background: var(--nsu-white);
+  }
+
+  .md-content__inner {
+    max-width: none;
+    margin: 0;
+    padding: 3rem 4rem 6rem;
+  }
+
+  /* Hide right TOC sidebar */
+  .md-sidebar--secondary {
+    display: none !important;
+  }
+
+  /* Header: divider vertical line over sidebar */
+  .md-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--nsu-sidebar-width);
+    width: 1.5px;
+    background: var(--wf-ink);
+    pointer-events: none;
+  }
+
+  .md-header__inner { padding-left: 0; }
+  .md-header__button.md-logo { padding-left: 1rem; }
+  .md-header__title { padding-right: 1rem; }
+}
+
+/* ── Primary sidebar navigation ─────────────────────────── */
+
+/* Hide Material's repeated site-name title in sidebar */
+.md-nav--primary > .md-nav__title { display: none; }
+
+.md-nav--primary { padding: 8px; }
+
+/* ── TOP-LEVEL items — WhatsApp style ───────────────────── */
+.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: var(--radius-soft);
+  font-family: "vinila-variable", system-ui, sans-serif;
+  font-variation-settings: var(--vv-extra-bold);
+  font-size: 0.95rem;
+  color: var(--wf-ink) !important;  /* no green active colour */
+  text-decoration: none !important;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+
+.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link:hover {
+  background: var(--wf-fill-2);
+}
+
+/* Expanded/active section — subtle fill only, no colour change */
+.md-nav--primary > .md-nav__list > .md-nav__item--active > .md-nav__link,
+.md-nav--primary > .md-nav__list > .md-nav__item > input:checked ~ .md-nav__link {
+  background: var(--wf-fill-1);
+  color: var(--wf-ink) !important;
+}
+
+/* Chevron stays dark in all states */
+.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link .md-nav__icon {
+  color: var(--wf-ink-3);
+  margin-left: auto;
+}
+
+/* ── Icon box (injected by JS) ──────────────────────────── */
+.nsu-nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 8px;
+  background: var(--wf-fill-3);
+  border: 1px solid var(--wf-line);
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.nsu-nav-label { flex: 1; }
+
+/* Make ellipsis span flex so icon + label sit side-by-side */
+.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link .md-ellipsis {
+  display: contents; /* children flow directly into the parent flex */
+}
+
+/* ── Sub-section labels (e.g. "Academic Appeals") ────────── */
+.md-nav--primary .md-nav .md-nav__item--nested > .md-nav__link {
+  font-size: 0.82rem;
+  color: var(--wf-ink-2);
+  font-variation-settings: var(--vv-extra-bold);
+  padding: 8px 12px;
+  border-radius: var(--radius-soft);
+  text-decoration: none;
+  display: block;
+  transition: background var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+}
+
+.md-nav--primary .md-nav .md-nav__item--nested > .md-nav__link:hover {
+  background: var(--wf-fill-2);
+  color: var(--wf-ink);
+}
+
+/* ── Article links ──────────────────────────────────────── */
+.md-nav--primary .md-nav .md-nav__item:not(.md-nav__item--nested) > .md-nav__link {
+  font-size: 0.85rem;
+  font-variation-settings: var(--vv-body);
+  color: var(--wf-ink-2) !important;
+  padding: 9px 12px;
+  border-radius: 0 var(--radius-soft) var(--radius-soft) 0;
+  display: block;
+  text-decoration: none !important;
+  transition: background var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+}
+
+.md-nav--primary .md-nav .md-nav__item:not(.md-nav__item--nested) > .md-nav__link:hover {
+  background: var(--wf-fill-2);
+  color: var(--wf-ink) !important;
+}
+
+/* Current article — inset left border */
+.md-nav--primary .md-nav .md-nav__link--active {
+  color: var(--wf-ink) !important;
+  background: var(--wf-fill-1) !important;
+  font-variation-settings: "wdth" 110, "wght" 700 !important;
+  box-shadow: inset 3px 0 0 var(--wf-ink) !important;
+  padding-left: 14px !important;
+}
+
+/* ── Typography ─────────────────────────────────────────── */
+.md-typeset h1 {
+  font-family: "vinila-variable", system-ui, sans-serif;
+  font-variation-settings: var(--vv-extra-bold);
+  color: var(--wf-ink);
+}
+
+.md-typeset h2 {
+  font-family: "vinila-variable", system-ui, sans-serif;
+  font-variation-settings: var(--vv-condensed-xb);
+  color: var(--wf-ink);
+}
+
+.md-typeset h3, .md-typeset h4 {
+  font-family: "vinila-variable", system-ui, sans-serif;
+  font-variation-settings: var(--vv-extra-bold);
+  color: var(--wf-ink);
+}
+
+/* Article body readability */
+.md-typeset p,
+.md-typeset li {
+  line-height: 1.65;
+  color: var(--wf-ink);
+}
+
+/* Lead paragraph (first p after h1) */
+.md-content__inner > p:first-of-type {
+  font-size: 1.1rem;
+  font-variation-settings: "wdth" 110, "wght" 500;
+  color: var(--wf-ink);
+}
+
+/* Article links — black with green underline */
+.md-content .md-typeset a:not(.nsu-copy-link):not(.md-button):not(.nsu-card):not(.nsu-feedback__btn) {
+  color: var(--wf-ink);
+  text-decoration: underline;
+  text-decoration-color: var(--nsu-green);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  font-variation-settings: "wdth" 110, "wght" 600;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.md-content .md-typeset a:not(.nsu-copy-link):not(.md-button):not(.nsu-card):not(.nsu-feedback__btn):hover {
+  color: var(--nsu-green);
+}
+
+/* ── Homepage h1 ─────────────────────────────────────────── */
+.nsu-homepage .md-content__inner > h1 {
+  font-family: "vinila-variable", system-ui, sans-serif;
+  font-variation-settings: var(--vv-display);
+  font-size: clamp(2.5rem, 4.5vw, 4rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  max-width: 11ch;
+  margin: 0 0 1.75rem;
+  border: none;
+  color: var(--wf-ink);
+  display: block; /* override the flex added by copy-link */
+}
+
+/* ── Eyebrow label with extending line ──────────────────── */
+.nsu-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: "vinila-variable", system-ui, sans-serif;
+  font-variation-settings: var(--vv-extra-bold);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--wf-ink);
+  margin: 0 0 1.25rem;
+}
+
+.nsu-eyebrow::after {
+  content: "";
+  flex: 1;
+  height: 1.5px;
+  background: var(--wf-ink);
+}
+
+/* ── Card grid ──────────────────────────────────────────── */
+.nsu-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin: 0 0 2rem;
+}
+
+.nsu-card {
+  background: var(--wf-fill-1);
+  border: 1.5px solid var(--wf-line);
+  border-radius: var(--radius-md);
+  padding: 28px 24px 26px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-decoration: none !important;
+  color: var(--wf-ink) !important;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+}
+
+.nsu-card:hover {
+  background: #e3e3df;
+}
+
+.nsu-card:active {
+  transform: scale(0.985);
+}
+
+/* Icon area — square with X placeholder */
+.nsu-card-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-soft);
+  background: var(--wf-fill-3);
+  border: 1.5px solid var(--wf-line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  flex-shrink: 0;
+}
+
+.nsu-card h3 {
+  font-family: "vinila-variable", system-ui, sans-serif;
+  font-variation-settings: var(--vv-extra-bold);
+  font-size: 1.1rem;
+  line-height: 1.15;
+  letter-spacing: -0.005em;
+  margin: 0;
+  color: var(--wf-ink);
+}
+
+.nsu-card p {
+  margin: 0;
+  color: var(--wf-ink-2);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  max-width: none;
+}
+
+/* Section landing pages — 3-col grid */
+@media (max-width: 900px) {
+  .nsu-cards { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 580px) {
+  .nsu-cards { grid-template-columns: 1fr; }
+}
+
+/* ── Homepage layout ─────────────────────────────────────── */
+.nsu-homepage .md-content {
+  background: var(--wf-page);
+}
+
+.nsu-homepage .md-content__inner {
+  padding: 3.5rem 4rem 6rem;
+}
+
+/* Hide header search on homepage */
+.nsu-homepage .md-header .md-search {
+  display: none;
+}
+
+/* ── Hero search ─────────────────────────────────────────── */
+.nsu-hero-search-target {
+  width: 100%;
+  margin: 0 0 3.5rem;
+}
+
+.nsu-search-wrapper { position: relative; width: 100%; }
+
+.nsu-search-form {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--wf-fill-2);
+  border: 1.5px solid var(--wf-line);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out);
+}
+
+.nsu-search-form:focus-within {
+  border-color: var(--nsu-green);
+  box-shadow: 0 0 0 2px rgba(105, 140, 84, 0.15);
+}
+
+.nsu-search-icon {
+  width: 22px;
+  height: 22px;
+  fill: var(--wf-ink);
+  flex-shrink: 0;
+}
+
+.nsu-search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 1.05rem;
+  font-family: "vinila-variable", system-ui, sans-serif;
+  font-variation-settings: var(--vv-body);
+  color: var(--wf-ink);
+  outline: none;
+  min-width: 0;
+}
+
+.nsu-search-input::placeholder {
+  color: var(--wf-ink-3);
+}
+
+.nsu-search-results {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--nsu-white);
+  border: 1.5px solid var(--wf-line);
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.nsu-search-result {
+  display: block;
+  padding: 0.85rem 1.25rem;
+  text-decoration: none !important;
+  border-bottom: 1px solid var(--wf-fill-2);
+  text-align: left;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+
+.nsu-search-result:last-child { border-bottom: none; }
+
+.nsu-search-result:hover { background: var(--wf-fill-2); }
+
+.nsu-result-title {
+  display: block;
+  font-weight: 700;
+  font-variation-settings: var(--vv-extra-bold);
+  font-size: 0.9rem;
+  color: var(--wf-ink);
+}
+
+.nsu-result-excerpt {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--wf-ink-3);
+  margin-top: 0.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nsu-search-empty {
+  padding: 1rem 1.25rem;
+  font-size: 0.9rem;
+  color: var(--wf-ink-3);
+  margin: 0;
+}
+
+/* ── Article page ────────────────────────────────────────── */
+
+/* Article h1 — extra bold (not display extended) */
+.md-content__inner > h1 {
+  font-family: "vinila-variable", system-ui, sans-serif;
+  font-variation-settings: var(--vv-extra-bold);
+  font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--wf-ink);
+  margin: 0 0 0.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  max-width: none;
+  border: none !important;
+}
+
+/* ── Copy link button ───────────────────────────────────── */
+.nsu-copy-link {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-family: "vinila-variable", system-ui, sans-serif;
+  font-variation-settings: var(--vv-extra-bold);
+  font-size: 0.8rem;
+  background: var(--wf-fill-2);
+  border: 1.5px solid var(--wf-ink);
+  border-radius: var(--radius-pill);
+  padding: 6px 14px;
+  cursor: pointer;
+  color: var(--wf-ink);
+  white-space: nowrap;
+  transition: background var(--dur-base) var(--ease-out);
+  line-height: 1;
+  align-self: center;
+}
+
+.nsu-copy-link:hover {
+  background: var(--nsu-yellow);
+}
+
+.nsu-copy-link--copied {
+  background: var(--nsu-yellow);
+}
+
+/* ── Read time ──────────────────────────────────────────── */
+.nsu-read-time {
+  font-size: 0.8rem;
+  color: var(--wf-ink-3);
+  margin: 0 0 2rem;
+  letter-spacing: 0.02em;
+}
+
+/* ── Related articles ────────────────────────────────────── */
+.nsu-related {
+  margin-top: 3.5rem;
+  padding-top: 1.75rem;
+  border-top: 1.5px solid var(--wf-line);
+}
+
+.nsu-related h3 {
+  font-family: "vinila-variable", system-ui, sans-serif;
+  font-variation-settings: var(--vv-extra-bold);
+  font-size: 1.15rem;
+  margin: 0 0 0.9rem;
+  color: var(--wf-ink);
+}
+
+.nsu-related ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nsu-related li {
+  border-bottom: 1px solid var(--wf-line);
+}
+
+.nsu-related li a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  color: var(--wf-ink) !important;
+  text-decoration: none !important;
+  font-size: 0.95rem;
+  font-variation-settings: "wdth" 110, "wght" 500;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.nsu-related li a:hover { color: var(--nsu-green) !important; }
+
+.nsu-related li a span {
+  color: var(--nsu-green);
+  text-decoration: underline;
+  text-decoration-color: var(--nsu-green);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  font-variation-settings: "wdth" 110, "wght" 600;
+}
+
+.nsu-related__arrow {
+  display: inline-block;
+  width: 18px;
+  height: 12px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.nsu-related__arrow::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 6px; top: 5px;
+  height: 1.5px;
+  background: var(--wf-ink-3);
+}
+
+.nsu-related__arrow::after {
+  content: "";
+  position: absolute;
+  right: 0; top: 1px;
+  width: 8px; height: 8px;
+  border-right: 1.5px solid var(--wf-ink-3);
+  border-top: 1.5px solid var(--wf-ink-3);
+  transform: rotate(45deg);
+}
+
+/* ── "Was this helpful?" — floating widget ───────────────── */
+.nsu-feedback {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 100;
+  background: var(--nsu-white);
+  border: 1.5px solid var(--wf-ink);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 360px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  font-family: "vinila-variable", system-ui, sans-serif;
+}
+
+.nsu-feedback__question {
+  font-size: 0.875rem;
+  font-variation-settings: var(--vv-extra-bold);
+  color: var(--wf-ink);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.nsu-feedback__buttons {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.nsu-feedback__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-variation-settings: var(--vv-extra-bold);
+  font-family: "vinila-variable", system-ui, sans-serif;
+  text-decoration: none !important;
+  border: 1.5px solid var(--wf-ink);
+  background: var(--wf-fill-2);
+  color: var(--wf-ink) !important;
+  cursor: pointer;
+  transition: background var(--dur-base) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+}
+
+.nsu-feedback__btn:hover { background: var(--nsu-yellow); }
+.nsu-feedback__btn:active { transform: scale(0.97); }
+
+.nsu-feedback__close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: var(--wf-ink-3);
+  padding: 0;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-left: 2px;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.nsu-feedback__close:hover { color: var(--wf-ink); }
+
+/* ── Footer — sits inside content column at article width ── */
+.nsu-footer {
+  background: transparent;
+  border-top: 1.5px solid var(--wf-line);
+  padding: 2.5rem 4rem 3rem;
+  margin: 4rem 0 0;
+}
+
+.nsu-footer__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+
+.nsu-footer__col h4 {
+  font-family: "vinila-variable", system-ui, sans-serif;
+  font-variation-settings: var(--vv-extra-bold);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--wf-ink-3);
+  margin: 0 0 1rem;
+}
+
+.nsu-footer__col a {
+  display: block;
+  padding: 5px 0;
+  color: var(--wf-ink);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-variation-settings: "wdth" 110, "wght" 500;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.nsu-footer__col a:hover { color: var(--nsu-green); }
+
+.nsu-footer__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--wf-line);
+  color: var(--wf-ink-3);
+  font-size: 0.8rem;
+}
+
+.nsu-footer__brand {
+  font-family: "vinila-variable", system-ui, sans-serif;
+  font-variation-settings: var(--vv-extra-bold);
+  color: var(--wf-ink);
+}
+
+@media (max-width: 60em) {
+  .nsu-footer { padding: 2rem 1.5rem 1.5rem; }
+  .nsu-footer__grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+}
+
+/* ── Highlight / mark ────────────────────────────────────── */
+.md-typeset mark {
+  background: var(--nsu-yellow);
+  color: var(--wf-ink);
+}
+
+/* ── MkDocs Material — general cleanups ─────────────────── */
+.md-typeset table { border-collapse: collapse; }
+.md-typeset table th { background: var(--wf-fill-1); }
+.md-typeset table tr:hover { background: var(--wf-fill-2); }
+
+.md-typeset code {
+  background: var(--wf-fill-1);
+  border-radius: var(--radius-soft);
+  font-size: 0.88em;
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 59.9em) {
+  .nsu-cards { grid-template-columns: 1fr 1fr; }
+  .nsu-feedback { left: 16px; right: 16px; bottom: 16px; max-width: none; }
+}
+
+@media (max-width: 480px) {
+  .nsu-cards { grid-template-columns: 1fr; }
+}
