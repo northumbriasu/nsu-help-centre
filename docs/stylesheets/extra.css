@@ -193,8 +193,8 @@ body {
   }
 
   .md-content__inner {
-    max-width: 52rem;
-    margin: 0 auto;
+    max-width: none;
+    margin: 0;
     padding: 3rem 4rem 6rem;
   }
 
@@ -349,7 +349,6 @@ body {
 /* Article body readability */
 .md-typeset p,
 .md-typeset li {
-  max-width: 68ch;
   line-height: 1.65;
   color: var(--wf-ink);
 }
@@ -799,8 +798,7 @@ body {
   background: transparent;
   border-top: 1.5px solid var(--wf-line);
   padding: 2.5rem 4rem 3rem;
-  margin: 4rem auto 0;
-  max-width: 52rem; /* matches .md-content__inner */
+  margin: 4rem 0 0;
 }
 
 .nsu-footer__grid {
