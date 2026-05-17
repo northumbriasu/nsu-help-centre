@@ -6,6 +6,8 @@ site_url: https://northumbriasu.github.io/nsu-help-centre/
 theme:
   name: material
   custom_dir: overrides
+  logo: assets/logo-mark-short.svg
+  favicon: assets/logo-mark-short.svg
   palette:
     scheme: default
   font: false

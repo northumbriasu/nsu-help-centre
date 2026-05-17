@@ -1,16 +1,50 @@
 /* ── Fonts ──────────────────────────────────────────────── */
 :root {
+  /* NSU Brand colours */
+  --nsu-pink:    #eba8c7;
+  --nsu-lilac:   #a3a8d6;
+  --nsu-cyan:    #38b6df;
+  --nsu-yellow:  #f5e35c;
+  --nsu-green:   #698c54;
+  --nsu-sand:    #e3d1c7;
+  --nsu-stone:   #babab5;
+  --nsu-slate:   #8299a1;
+  --nsu-beige:   #e5d2c8;   /* help centre header/sidebar bg */
+  --nsu-black:   #000000;
+  --nsu-white:   #ffffff;
+
+  /* Semantic aliases */
+  --nsu-purple:  var(--nsu-lilac);   /* primary interactive / accent */
+
+  /* Type variation settings */
+  --vv-body:          "wdth" 110, "wght" 400;
+  --vv-display:       "wdth" 130, "wght" 900;
+  --vv-condensed-xb:  "wdth"  85, "wght" 800;
+  --vv-extra-bold:    "wdth" 100, "wght" 800;
+  --vv-nav:           "wdth" 100, "wght" 600;
+
+  /* Motion */
+  --ease-out:    cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-fast:    120ms;
+  --dur-base:    200ms;
+
+  /* Radius — brand default 6px everywhere */
+  --radius-soft: 6px;
+  --radius-md:   10px;
+  --radius-pill: 999px;
+
+  /* Layout */
+  --nsu-sidebar-width: 16rem;
+
+  /* Material token overrides */
   --md-text-font: "vinila-variable", system-ui, sans-serif;
   --md-code-font: "Roboto Mono", monospace;
-  --nsu-beige: #e5d2c8;
-  --nsu-yellow: #f5e35c;
-  --nsu-pink: #eba8c7;
-  --nsu-purple: #9793c7;
-  --nsu-sidebar-width: 16rem;
 }
 
+/* ── Base typography ────────────────────────────────────── */
 body {
   font-family: "vinila-variable", system-ui, sans-serif;
+  font-variation-settings: var(--vv-body);
 }
 
 /* ── Colour scheme ──────────────────────────────────────── */
@@ -21,28 +55,50 @@ body {
   --md-primary-fg-color--dark:  #c8b4a8;
   --md-primary-bg-color:        #000000;
   --md-primary-bg-color--light: rgba(0, 0, 0, 0.54);
-  --md-accent-fg-color:         var(--nsu-purple);
-  --md-accent-fg-color--transparent: rgba(151, 147, 199, 0.1);
+  --md-accent-fg-color:         var(--nsu-lilac);
+  --md-accent-fg-color--transparent: rgba(163, 168, 214, 0.1);
   --md-accent-bg-color:         #000000;
-  --md-typeset-a-color:         var(--nsu-purple);
+  --md-typeset-a-color:         var(--nsu-lilac);
+}
+
+/* ── MkDocs heading variation settings ──────────────────── */
+.md-typeset h1 {
+  font-variation-settings: var(--vv-display);
+}
+.md-typeset h2 {
+  font-variation-settings: var(--vv-condensed-xb);
+}
+.md-typeset h3,
+.md-typeset h4 {
+  font-variation-settings: var(--vv-extra-bold);
 }
 
 /* ── Header ─────────────────────────────────────────────── */
 .md-header {
-  background-color: var(--nsu-beige);
+  background-color: #ffffff;
   color: #000;
-  box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+  box-shadow: none;
+  border-bottom: 2px solid #000;
 }
 
 .md-header__title,
 .md-header__topic {
   color: #000;
   font-weight: 700;
+  font-variation-settings: var(--vv-extra-bold);
+}
+
+/* Logo sizing — matches Header.jsx (44px height) */
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 44px;
+  width: auto;
 }
 
 .md-search__input {
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(0, 0, 0, 0.06);
   color: #000;
+  border-radius: var(--radius-soft);
 }
 
 .md-search__input::placeholder {
@@ -52,7 +108,8 @@ body {
 /* ── Sidebar ────────────────────────────────────────────── */
 .md-nav__link--active,
 .md-nav__link:hover {
-  color: var(--nsu-purple);
+  color: var(--nsu-lilac);
+  transition: color var(--dur-fast) var(--ease-out);
 }
 
 .md-nav__title {
@@ -62,7 +119,8 @@ body {
 
 /* ── Links ──────────────────────────────────────────────── */
 .md-typeset a {
-  color: var(--nsu-purple);
+  color: var(--nsu-lilac);
+  transition: color var(--dur-fast) var(--ease-out);
 }
 
 .md-typeset a:hover {
@@ -77,13 +135,17 @@ body {
 
 /* ── Buttons ────────────────────────────────────────────── */
 .md-button {
-  border-color: var(--nsu-purple);
-  color: var(--nsu-purple);
+  border-color: var(--nsu-lilac);
+  color: var(--nsu-lilac);
+  border-radius: var(--radius-soft);
+  transition: background var(--dur-base) var(--ease-out),
+              color var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out);
 }
 
 .md-button--primary {
-  background-color: var(--nsu-purple);
-  border-color: var(--nsu-purple);
+  background-color: var(--nsu-lilac);
+  border-color: var(--nsu-lilac);
   color: #fff;
 }
 
@@ -94,7 +156,6 @@ body {
 
 /* ── Dual-scroll split layout (desktop) ─────────────────── */
 @media screen and (min-width: 60em) {
-  /* Make the body a flex column so header + container share the viewport */
   body {
     display: flex;
     flex-direction: column;
@@ -107,7 +168,6 @@ body {
     position: relative !important;
   }
 
-  /* Announce and skip links etc. sit above layout */
   .md-skip {
     position: fixed;
   }
@@ -126,7 +186,6 @@ body {
     min-height: 0;
   }
 
-  /* Two-column flex: sidebar | content */
   .md-main__inner {
     height: 100%;
     overflow: hidden;
@@ -175,7 +234,7 @@ body {
     padding: 2rem 2.5rem 4rem;
   }
 
-  /* Hide right TOC sidebar — TOC is already integrated inline */
+  /* Hide right TOC sidebar */
   .md-sidebar--secondary {
     display: none !important;
   }
@@ -192,17 +251,24 @@ body {
 .nsu-card {
   background: #fafafa;
   border: 1.5px solid #ece0da;
-  border-radius: 8px;
+  border-radius: var(--radius-soft);
   padding: 1.25rem 1rem;
   text-decoration: none !important;
   color: #000 !important;
   display: block;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition: border-color var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
 }
 
 .nsu-card:hover {
-  border-color: var(--nsu-purple);
-  box-shadow: 0 2px 10px rgba(151, 147, 199, 0.15);
+  border-color: var(--nsu-lilac);
+  box-shadow: 0 2px 10px rgba(163, 168, 214, 0.15);
+  transform: translateY(-1px);
+}
+
+.nsu-card:active {
+  transform: scale(0.98);
 }
 
 .nsu-card-icon {
@@ -214,6 +280,7 @@ body {
 .nsu-card h3 {
   font-size: 0.95rem;
   font-weight: 700;
+  font-variation-settings: var(--vv-extra-bold);
   margin: 0 0 0.35rem;
   color: #000;
 }
@@ -229,6 +296,7 @@ body {
 .md-content__inner h1:first-child {
   font-size: 1.8rem;
   font-weight: 800;
+  font-variation-settings: var(--vv-display);
   margin-bottom: 1rem;
   border: none;
 }
@@ -236,6 +304,7 @@ body {
 .md-content__inner h2 {
   font-size: 0.85rem;
   font-weight: 700;
+  font-variation-settings: var(--vv-extra-bold);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: rgba(0, 0, 0, 0.4);
@@ -252,6 +321,7 @@ body {
 .nsu-homepage .md-content__inner > h1 {
   font-size: 2rem;
   font-weight: 800;
+  font-variation-settings: var(--vv-display);
   border: none;
 }
 
@@ -282,11 +352,18 @@ body {
   gap: 0.75rem;
   background: #f0ebe8;
   border: 1.5px solid #e0d0c8;
-  border-radius: 8px;
+  border-radius: var(--radius-soft);
   height: 52px;
   padding: 0 1.25rem;
   width: 100%;
   box-sizing: border-box;
+  transition: border-color var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out);
+}
+
+.nsu-search-form:focus-within {
+  border-color: var(--nsu-lilac);
+  box-shadow: 0 0 0 2px rgba(163, 168, 214, 0.2);
 }
 
 .nsu-search-icon {
@@ -302,6 +379,7 @@ body {
   background: transparent;
   font-size: 1rem;
   font-family: "vinila-variable", system-ui, sans-serif;
+  font-variation-settings: var(--vv-body);
   color: #000;
   outline: none;
   min-width: 0;
@@ -318,7 +396,7 @@ body {
   right: 0;
   background: #fff;
   border: 1.5px solid #e0d0c8;
-  border-radius: 8px;
+  border-radius: var(--radius-soft);
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
   z-index: 9999;
   max-height: 400px;
@@ -331,6 +409,7 @@ body {
   text-decoration: none !important;
   border-bottom: 1px solid #f5eeea;
   text-align: left;
+  transition: background var(--dur-fast) var(--ease-out);
 }
 
 .nsu-search-result:last-child {
@@ -344,8 +423,9 @@ body {
 .nsu-result-title {
   display: block;
   font-weight: 600;
+  font-variation-settings: var(--vv-extra-bold);
   font-size: 0.9rem;
-  color: var(--nsu-purple);
+  color: var(--nsu-lilac);
 }
 
 .nsu-result-excerpt {
@@ -377,6 +457,7 @@ body {
 .nsu-feedback__question {
   font-size: 0.95rem;
   font-weight: 600;
+  font-variation-settings: var(--vv-extra-bold);
   color: rgba(0, 0, 0, 0.65);
   margin: 0 0 1rem;
 }
@@ -390,21 +471,28 @@ body {
 .nsu-feedback__btn {
   display: inline-block;
   padding: 0.45rem 1.5rem;
-  border-radius: 4px;
+  border-radius: var(--radius-soft);
   font-size: 0.88rem;
   font-weight: 600;
+  font-variation-settings: var(--vv-extra-bold);
   text-decoration: none !important;
   border: 1.5px solid;
-  transition: background 0.15s, color 0.15s;
+  transition: background var(--dur-base) var(--ease-out),
+              color var(--dur-base) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+}
+
+.nsu-feedback__btn:active {
+  transform: scale(0.98);
 }
 
 .nsu-feedback__btn--yes {
-  border-color: #9793c7;
-  color: #9793c7;
+  border-color: var(--nsu-lilac);
+  color: var(--nsu-lilac);
 }
 
 .nsu-feedback__btn--yes:hover {
-  background: #9793c7;
+  background: var(--nsu-lilac);
   color: #fff !important;
 }
 
@@ -414,8 +502,8 @@ body {
 }
 
 .nsu-feedback__btn--no:hover {
-  border-color: #eba8c7;
-  color: #eba8c7 !important;
+  border-color: var(--nsu-pink);
+  color: var(--nsu-pink) !important;
 }
 
 /* ── Read time ──────────────────────────────────────────── */
@@ -430,6 +518,7 @@ body {
 .md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav__link {
   text-transform: uppercase;
   font-weight: 700;
+  font-variation-settings: var(--vv-extra-bold);
   font-size: 0.72rem;
   letter-spacing: 0.07em;
   color: rgba(0, 0, 0, 0.55);
@@ -437,10 +526,10 @@ body {
 }
 
 .md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav__link:hover {
-  color: var(--nsu-purple);
+  color: var(--nsu-lilac);
 }
 
-/* ── Header: draw a divider line aligned with the sidebar ── */
+/* ── Header: divider aligned with sidebar ───────────────── */
 @media screen and (min-width: 60em) {
   .md-header {
     position: relative;
@@ -457,7 +546,6 @@ body {
     pointer-events: none;
   }
 
-  /* Left-align logo and title, constrained to sidebar width */
   .md-header__inner {
     padding-left: 0;
   }
@@ -485,18 +573,19 @@ body {
   font-family: "vinila-variable", system-ui, sans-serif;
   background: none;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: var(--radius-soft);
   padding: 0.28rem 0.7rem;
   cursor: pointer;
   color: rgba(0, 0, 0, 0.38);
   white-space: nowrap;
-  transition: color 0.15s, border-color 0.15s;
+  transition: color var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out);
   line-height: 1;
 }
 
 .nsu-copy-link:hover {
-  color: var(--nsu-purple);
-  border-color: var(--nsu-purple);
+  color: var(--nsu-lilac);
+  border-color: var(--nsu-lilac);
 }
 
 .nsu-copy-link--copied {
