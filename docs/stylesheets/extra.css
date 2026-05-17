@@ -222,6 +222,9 @@ body {
 
 /* ── Primary sidebar navigation ─────────────────────────── */
 
+/* Hide the repeated site-name title inside the sidebar */
+.md-nav--primary > .md-nav__title { display: none; }
+
 /* Container padding */
 .md-nav--primary { padding: 8px 8px; }
 
@@ -775,19 +778,19 @@ body {
 
 .nsu-feedback__close:hover { color: var(--wf-ink); }
 
-/* ── Footer ─────────────────────────────────────────────── */
+/* ── Footer — sits inside content column at article width ── */
 .nsu-footer {
-  background: var(--wf-fill-2);
+  background: transparent;
   border-top: 1.5px solid var(--wf-line);
-  padding: 3.5rem 4rem 2rem;
-  margin-top: 6rem;
+  padding: 2.5rem 4rem 3rem;
+  margin: 4rem auto 0;
+  max-width: 52rem; /* matches .md-content__inner */
 }
 
 .nsu-footer__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 3.5rem;
-  max-width: 68rem;
+  gap: 2.5rem;
 }
 
 .nsu-footer__col h4 {
@@ -830,8 +833,8 @@ body {
 }
 
 @media (max-width: 60em) {
-  .nsu-footer { padding: 2.5rem 1.5rem 1.5rem; }
-  .nsu-footer__grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .nsu-footer { padding: 2rem 1.5rem 1.5rem; }
+  .nsu-footer__grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
 }
 
 /* ── Highlight / mark ────────────────────────────────────── */
