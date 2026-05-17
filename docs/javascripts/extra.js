@@ -35,38 +35,106 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // ── "Was this helpful?" feedback (article pages only) ────
+  // ── Related articles (article pages only, not section landings) ──
   if (!isHomepage) {
-    var content = document.querySelector('.md-content__inner');
-    var isSection = document.querySelector('.nsu-cards'); // section landing pages
+    var isSection = !!document.querySelector('.nsu-cards');
+    if (!isSection) {
+      // Build a list of all nav links from the sidebar, grouped by section
+      var allNavLinks = Array.from(document.querySelectorAll('.md-nav--primary .md-nav__link'));
+      var currentPath = window.location.pathname;
 
-    if (content && !isSection) {
-      var title   = document.title.replace(' - NSU Help Centre', '').trim();
-      var url     = window.location.href;
-      var email   = 'su.marketing@northumbria.ac.uk';
+      // Find the section that contains the current page
+      var siblings = [];
+      var inSection = false;
+      var sectionLinks = [];
 
-      var yesLink = 'mailto:' + email
-        + '?subject=' + encodeURIComponent('✓ Helpful: ' + title)
-        + '&body=' + encodeURIComponent('Article: ' + url + '\n\nThis article was helpful.');
+      // Walk nav items to find siblings (articles in the same section)
+      var navItems = Array.from(document.querySelectorAll('.md-nav--primary .md-nav__item'));
+      navItems.forEach(function (item) {
+        var link = item.querySelector(':scope > .md-nav__link');
+        if (!link) return;
+        var href = link.getAttribute('href') || '';
+        // Resolve relative href to full path
+        var abs = new URL(href, window.location.href).pathname;
+        if (abs === currentPath) {
+          inSection = true;
+        }
+      });
 
-      var noLink  = 'mailto:' + email
-        + '?subject=' + encodeURIComponent('✗ Not helpful: ' + title)
-        + '&body=' + encodeURIComponent('Article: ' + url + '\n\nThis article was not helpful.\n\nWhat could be improved?\n');
+      // Simpler approach: use the nav links that share the same parent nav section
+      // Find the active nav item's parent section
+      var activeLink = document.querySelector('.md-nav__link--active, .md-nav__item--active > .md-nav__link');
+      if (activeLink) {
+        // Go up to find the parent nav list
+        var parentNav = activeLink.closest('.md-nav:not(.md-nav--primary)');
+        if (parentNav) {
+          var links = Array.from(parentNav.querySelectorAll('.md-nav__link'));
+          links.forEach(function (l) {
+            var href = l.getAttribute('href');
+            if (!href || href === '#') return;
+            var abs = new URL(href, window.location.href).pathname;
+            if (abs !== currentPath && l.textContent.trim()) {
+              siblings.push({ title: l.textContent.trim(), href: href });
+            }
+          });
+        }
+      }
 
-      var feedback = document.createElement('div');
-      feedback.className = 'nsu-feedback';
-      feedback.innerHTML =
-        '<p class="nsu-feedback__question">Was this article helpful?</p>' +
-        '<div class="nsu-feedback__buttons">' +
-          '<a class="nsu-feedback__btn nsu-feedback__btn--yes" href="' + yesLink + '">Yes</a>' +
-          '<a class="nsu-feedback__btn nsu-feedback__btn--no"  href="' + noLink  + '">No</a>' +
-        '</div>';
-
-      content.appendChild(feedback);
+      // Pick up to 3 siblings (shuffle-ish: take from end to vary the selection)
+      if (siblings.length > 0) {
+        var picks = siblings.slice(0, 3);
+        var content = document.querySelector('.md-content__inner');
+        if (content) {
+          var rel = document.createElement('div');
+          rel.className = 'nsu-related';
+          rel.innerHTML = '<h3>Related articles</h3>' +
+            '<ul>' +
+            picks.map(function (p) {
+              return '<li><a href="' + p.href + '"><span>' + p.title + '</span><span class="nsu-related__arrow" aria-hidden="true"></span></a></li>';
+            }).join('') +
+            '</ul>';
+          content.appendChild(rel);
+        }
+      }
     }
   }
 
-  // ── Homepage: custom search + hide header search ──────────
+  // ── Floating "Was this helpful?" feedback ────────────────────
+  if (!isHomepage) {
+    var isSection = !!document.querySelector('.nsu-cards');
+    if (!isSection) {
+      var title  = document.title.replace(' - NSU Help Centre', '').trim();
+      var url    = window.location.href;
+      var email  = 'su.marketing@northumbria.ac.uk';
+
+      var yesHref = 'mailto:' + email
+        + '?subject=' + encodeURIComponent('✓ Helpful: ' + title)
+        + '&body=' + encodeURIComponent('Article: ' + url + '\n\nThis article was helpful.');
+
+      var noHref  = 'mailto:' + email
+        + '?subject=' + encodeURIComponent('✗ Not helpful: ' + title)
+        + '&body=' + encodeURIComponent('Article: ' + url + '\n\nThis article was not helpful.\n\nWhat could be improved?\n');
+
+      var widget = document.createElement('aside');
+      widget.className = 'nsu-feedback';
+      widget.setAttribute('aria-label', 'Article feedback');
+      widget.innerHTML =
+        '<span class="nsu-feedback__question">Was this helpful?</span>' +
+        '<div class="nsu-feedback__buttons">' +
+          '<a class="nsu-feedback__btn" href="' + yesHref + '">👍 Yes</a>' +
+          '<a class="nsu-feedback__btn" href="' + noHref  + '">👎 No</a>' +
+        '</div>' +
+        '<button class="nsu-feedback__close" aria-label="Dismiss">×</button>';
+
+      document.body.appendChild(widget);
+
+      widget.querySelector('.nsu-feedback__close').addEventListener('click', function () {
+        widget.style.display = 'none';
+      });
+    }
+  }
+
+  // ── Homepage: custom search ────────────────────────────────
   if (!isHomepage) return;
 
   document.body.classList.add('nsu-homepage');
@@ -90,7 +158,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function stripHtml(s) { return (s || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(); }
 
-  // Fetch the MkDocs search index
   fetch('search/search_index.json')
     .then(function (r) { return r.json(); })
     .then(function (data) { docs = data.docs || []; })
