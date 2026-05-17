@@ -1,6 +1,38 @@
 document.addEventListener('DOMContentLoaded', function () {
   var isHomepage = !!document.querySelector('.nsu-hero-search-target');
 
+  // ── Restructure primary nav items: extract emoji → icon box ──
+  document.querySelectorAll(
+    '.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link'
+  ).forEach(function (link) {
+    var ellipsis = link.querySelector('.md-ellipsis');
+    if (!ellipsis || ellipsis.querySelector('.nsu-nav-icon')) return;
+
+    var text = ellipsis.textContent.trim();
+    // Split on first space: "📚 Advice" → ["📚", "Advice"]
+    var spaceIdx = text.indexOf(' ');
+    if (spaceIdx < 1) return;
+
+    var emoji = text.slice(0, spaceIdx);
+    var label = text.slice(spaceIdx + 1);
+
+    // Only process if first char is non-ASCII (i.e. emoji)
+    if (emoji.codePointAt(0) <= 127) return;
+
+    var iconEl = document.createElement('span');
+    iconEl.className = 'nsu-nav-icon';
+    iconEl.setAttribute('aria-hidden', 'true');
+    iconEl.textContent = emoji;
+
+    var labelEl = document.createElement('span');
+    labelEl.className = 'nsu-nav-label';
+    labelEl.textContent = label;
+
+    ellipsis.innerHTML = '';
+    ellipsis.appendChild(iconEl);
+    ellipsis.appendChild(labelEl);
+  });
+
   // ── Copy link button + read time (article pages only) ───────
   if (!isHomepage) {
     var h1 = document.querySelector('.md-content__inner > h1');

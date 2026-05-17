@@ -222,78 +222,100 @@ body {
 
 /* ── Primary sidebar navigation ─────────────────────────── */
 
-/* Hide the repeated site-name title inside the sidebar */
+/* Hide Material's repeated site-name title in sidebar */
 .md-nav--primary > .md-nav__title { display: none; }
 
-/* Container padding */
-.md-nav--primary { padding: 8px 8px; }
+.md-nav--primary { padding: 8px; }
 
-/* TOP-LEVEL items (sections + Home) */
-.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link,
-.md-nav--primary > .md-nav__list > .md-nav__item > label.md-nav__link {
+/* ── TOP-LEVEL items — WhatsApp style ───────────────────── */
+.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 11px 12px;
+  gap: 14px;
+  padding: 12px 14px;
   border-radius: var(--radius-soft);
   font-family: "vinila-variable", system-ui, sans-serif;
   font-variation-settings: var(--vv-extra-bold);
-  font-size: 0.9rem;
-  color: var(--wf-ink);
+  font-size: 0.95rem;
+  color: var(--wf-ink) !important;  /* no green active colour */
+  text-decoration: none !important;
   cursor: pointer;
-  transition: background var(--dur-fast) var(--ease-out),
-              color var(--dur-fast) var(--ease-out);
-  text-decoration: none;
+  transition: background var(--dur-fast) var(--ease-out);
 }
 
-.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link:hover,
-.md-nav--primary > .md-nav__list > .md-nav__item > label.md-nav__link:hover {
+.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link:hover {
   background: var(--wf-fill-2);
 }
 
-/* Active / expanded section → black bg, white text */
-.md-nav--primary > .md-nav__list > .md-nav__item > input:checked ~ label.md-nav__link,
-.md-nav--primary > .md-nav__list > .md-nav__item--active > label.md-nav__link {
-  background: var(--wf-ink);
-  color: var(--nsu-white);
+/* Expanded/active section — subtle fill only, no colour change */
+.md-nav--primary > .md-nav__list > .md-nav__item--active > .md-nav__link,
+.md-nav--primary > .md-nav__list > .md-nav__item > input:checked ~ .md-nav__link {
+  background: var(--wf-fill-1);
+  color: var(--wf-ink) !important;
 }
 
-/* Chevron icon in expanded state */
-.md-nav--primary > .md-nav__list > .md-nav__item > input:checked ~ label.md-nav__link .md-nav__icon,
-.md-nav--primary > .md-nav__list > .md-nav__item--active > label.md-nav__link .md-nav__icon {
-  color: var(--nsu-white);
+/* Chevron stays dark in all states */
+.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link .md-nav__icon {
+  color: var(--wf-ink-3);
+  margin-left: auto;
 }
 
-/* Sub-section labels (e.g. "Academic Appeals" inside Advice) */
-.md-nav--primary .md-nav .md-nav__item--nested > label.md-nav__link {
+/* ── Icon box (injected by JS) ──────────────────────────── */
+.nsu-nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 8px;
+  background: var(--wf-fill-3);
+  border: 1px solid var(--wf-line);
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.nsu-nav-label { flex: 1; }
+
+/* Make ellipsis span flex so icon + label sit side-by-side */
+.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link .md-ellipsis {
+  display: contents; /* children flow directly into the parent flex */
+}
+
+/* ── Sub-section labels (e.g. "Academic Appeals") ────────── */
+.md-nav--primary .md-nav .md-nav__item--nested > .md-nav__link {
   font-size: 0.82rem;
   color: var(--wf-ink-2);
   font-variation-settings: var(--vv-extra-bold);
   padding: 8px 12px;
   border-radius: var(--radius-soft);
+  text-decoration: none;
+  display: block;
+  transition: background var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
 }
 
-.md-nav--primary .md-nav .md-nav__item--nested > label.md-nav__link:hover {
+.md-nav--primary .md-nav .md-nav__item--nested > .md-nav__link:hover {
   background: var(--wf-fill-2);
   color: var(--wf-ink);
 }
 
-/* Article links in sidebar (deepest level) */
+/* ── Article links ──────────────────────────────────────── */
 .md-nav--primary .md-nav .md-nav__item:not(.md-nav__item--nested) > .md-nav__link {
   font-size: 0.85rem;
   font-variation-settings: var(--vv-body);
-  color: var(--wf-ink-2);
+  color: var(--wf-ink-2) !important;
   padding: 9px 12px;
   border-radius: 0 var(--radius-soft) var(--radius-soft) 0;
   display: block;
-  text-decoration: none;
+  text-decoration: none !important;
   transition: background var(--dur-fast) var(--ease-out),
               color var(--dur-fast) var(--ease-out);
 }
 
 .md-nav--primary .md-nav .md-nav__item:not(.md-nav__item--nested) > .md-nav__link:hover {
   background: var(--wf-fill-2);
-  color: var(--wf-ink);
+  color: var(--wf-ink) !important;
 }
 
 /* Current article — inset left border */
@@ -303,12 +325,6 @@ body {
   font-variation-settings: "wdth" 110, "wght" 700 !important;
   box-shadow: inset 3px 0 0 var(--wf-ink) !important;
   padding-left: 14px !important;
-}
-
-/* Section headers (ADVICE, WELLBEING, REPS) in sidebar — remove old uppercase style  */
-.md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav__link {
-  text-transform: none;
-  letter-spacing: normal;
 }
 
 /* ── Typography ─────────────────────────────────────────── */
